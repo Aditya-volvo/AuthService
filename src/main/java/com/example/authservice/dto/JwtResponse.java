@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 public class JwtResponse {
     private String token;
     private String type="Bearer";
-    private String adminId;
+    private Long adminId;
     private String password;
 
-    public JwtResponse(String token,String adminId,String password){
+    public JwtResponse(String token,Long adminId,String password){
         this.token=token;
         this.adminId=adminId;
         this.password=password;
