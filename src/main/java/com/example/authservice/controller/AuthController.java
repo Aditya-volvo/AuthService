@@ -1,5 +1,6 @@
 package com.example.authservice.controller;
 
+import com.example.authservice.dto.LoginRequest;
 import com.example.authservice.dto.SignupRequest;
 import com.example.authservice.repository.AdminRepository;
 import com.example.authservice.service.AdminService;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,14 +18,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthController {
-    private  final AuthenticationManager authenticationManager;
+
     private  final AdminService adminService;
-    private  final PasswordEncoder passwordEncoder;
-    private  final JwtUtils jwtUtils;
 
+
+    @PostMapping("/signup")
     public ResponseEntity<?> registerAdmin(@Valid @RequestBody SignupRequest signupRequest){
-            adminService.registerAdmin(signupRequest);
+       return  adminService.registerAdmin(signupRequest);
+    }
 
+    @PostMapping("/login")
+    public ResponseEntity<?> adminAuthentication(@Valid @RequestBody LoginRequest loginRequest){
+        return adminService.adminAuthetication(loginRequest);
     }
 
 }
