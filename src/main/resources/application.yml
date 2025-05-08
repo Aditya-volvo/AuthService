@@ -1,1 +1,8 @@
-spring.application.name=AuthService
+authservice:
+  jwtSecret:  "your-256-bit-secret"
+  jwtExpirationMs: 3600000
+
+spring:
+  application:
+    name: AuthService
+
