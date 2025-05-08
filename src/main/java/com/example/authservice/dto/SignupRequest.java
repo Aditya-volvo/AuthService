@@ -14,8 +14,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class SignupRequest {
     @NotBlank
-    private Long adminId;
-    @NotBlank
     @Email
     private String adminEmail;
     @NotBlank
