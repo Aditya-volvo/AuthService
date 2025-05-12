@@ -3,6 +3,7 @@ package com.example.authservice.security;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -40,5 +41,13 @@ public class JwtUtils {
         catch (JwtException | IllegalArgumentException e){
             return false;
         }
+    }
+
+    public String parseJwt(HttpServletRequest request) {
+        String headAuth = request.getHeader("Authorization");
+        if(headAuth != null && headAuth.startsWith("Bearer")){
+            return  headAuth.substring(7);
+        }
+        return null;
     }
 }
