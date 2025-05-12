@@ -46,13 +46,18 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public ResponseEntity<?> adminAuthetication(LoginRequest loginRequest) {
         Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getAdminEmail(), loginRequest.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
+                .authenticate(
+                        new UsernamePasswordAuthenticationToken(
+                                loginRequest.getAdminEmail(),
+                                loginRequest.getPassword()
+                        ));
         String jwt= jwtUtils.generateJwtTokens(authentication);
-
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-        return  ResponseEntity.ok(new JwtResponse(jwt,userDetails.getId(),userDetails.getEmail()));
+        return  ResponseEntity.ok(
+                new JwtResponse(jwt,
+                        userDetails.getId(),
+                        userDetails.getEmail()
+                ));
     }
 }
